@@ -25,7 +25,7 @@ steps:
   displayName: 'dotnet restore $(NugetConfig)'
   inputs:
     command: restore
-    arguments: '--configfile $(NugetConfig)'
+    arguments: '--configfile ./$(NugetConfig) -v d'
     
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
