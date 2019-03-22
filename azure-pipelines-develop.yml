@@ -16,16 +16,16 @@ variables:
   vstsFeedName: 'develop'  
  
 steps:
-#- task: NuGetToolInstaller@0
-#  displayName: 'Use NuGet 4.9.3'
-#  inputs:
-#    versionSpec: '4.9.3'
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.9.3'
+  inputs:
+    versionSpec: '4.9.3'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore $(NugetConfig)'
   inputs:
     command: restore
-    arguments: '--configfile $(NugetConfig)1'
+    arguments: '--configfile $(NugetConfig)'
     
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
