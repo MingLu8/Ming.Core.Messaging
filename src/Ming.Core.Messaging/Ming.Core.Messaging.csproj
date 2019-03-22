@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+ <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+	<PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Azure.ServiceBus" Version="3.3.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Include="Microsoft.SourceLink.Vsts.Git" Version="1.0.0-beta2-18618-05" Condition="'$(Configuration)'=='Debug'">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+	<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" Condition="'$(Configuration)'=='Debug'">
+	 <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.Linq" Version="4.3.0" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.11" />
+  </ItemGroup>
+
+</Project>

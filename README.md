@@ -1,1 +1,1 @@
-# Ming.Core.Messaging
+# My.Core.Messaging

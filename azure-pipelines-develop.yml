@@ -1,0 +1,57 @@
+
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+  
+trigger:
+- develop
+
+pool:
+  vmImage: 'Ubuntu-16.04'
+
+variables:
+  buildConfiguration: 'Debug'
+  nugetConfig: 'nuget.config' 
+  vstsFeedName: 'ming-develop'  
+ 
+steps:
+#- task: NuGetToolInstaller@0
+#  displayName: 'Use NuGet 4.9.3'
+#  inputs:
+#    versionSpec: '4.9.3'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore $(NugetConfig)'
+  inputs:
+    command: restore
+    arguments: '--configfile $(NugetConfig)'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
+  inputs:
+    command: build
+    arguments: '--no-restore --configuration $(BuildConfiguration)'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
+  inputs:
+    command: test
+    arguments: '--no-restore --no-build  --configuration $(BuildConfiguration)'
+    projects: '**/*.Tests.csproj'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet pack'
+  inputs:
+    command: pack
+    arguments: '--no-restore --no-build  --configuration $(BuildConfiguration)'
+    packagesToPack: '**/*.csproj;!**/*.Tests.csproj'
+
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet push'
+  inputs:
+    command: push
+    packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.Tests.nupkg'
+    publishVstsFeed: '$(VstsFeedName)'
+    publishPackageMetadata: false
+
