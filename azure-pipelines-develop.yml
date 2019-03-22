@@ -21,11 +21,12 @@ steps:
   inputs:
     versionSpec: '4.9.3'
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet restore $(NugetConfig)'
+- task: NuGetCommand@2
+  displayName: 'nuget restore $(NugetConfig)'
   inputs:
-    command: restore
-    arguments: '--configfile $(NugetConfig)'
+    restoreSolution: '**\*.sln'
+    command: nuget restore
+    arguments: '--configFile $(NugetConfig)'
     
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
