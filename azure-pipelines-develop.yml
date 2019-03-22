@@ -16,18 +16,18 @@ variables:
   vstsFeedName: 'develop'  
  
 steps:
-- task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 4.9.3'
-  inputs:
-    versionSpec: '4.9.3'
+#- task: NuGetToolInstaller@0
+#  displayName: 'Use NuGet 4.9.3'
+#  inputs:
+#    versionSpec: '4.9.3'
 
-- task: NuGetCommand@2
-  displayName: 'nuget restore $(NugetConfig)'
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet restore $(NugetConfig)'
   inputs:
     restoreSolution: '**\*.sln'
     command: restore
     feedsToUse: config
-    #arguments: '--configFile $(NugetConfig)'
+    verbosityRestore: Detailed
     nugetConfigPath: $(NugetConfig)
     
 - task: DotNetCoreCLI@2
