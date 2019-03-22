@@ -13,7 +13,7 @@ pool:
 variables:
   buildConfiguration: 'Debug'
   nugetConfig: 'nuget.config' 
-  vstsFeedName: 'ming-develop'  
+  vstsFeedName: 'develop'  
  
 steps:
 #- task: NuGetToolInstaller@0
@@ -25,7 +25,7 @@ steps:
   displayName: 'dotnet restore $(NugetConfig)'
   inputs:
     command: restore
-    arguments: '--configfile $(NugetConfig)'
+    arguments: '~/src --configfile $(NugetConfig)'
     
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
