@@ -20,15 +20,15 @@ steps:
 #  displayName: 'Use NuGet 4.9.3'
 #  inputs:
 #    versionSpec: '4.9.3'
+- task: DotNetCoreInstaller@0
+  inputs:
+    version: '2.2.104'
 
 - task: DotNetCoreCLI@2
   displayName: 'dotnet restore $(NugetConfig)'
   inputs:
-    restoreSolution: '**\*.sln'
     command: restore
-    feedsToUse: config
-    verbosityRestore: Detailed
-    nugetConfigPath: $(NugetConfig)
+    arguments: '--configfile $(NugetConfig) -v d'
     
 - task: DotNetCoreCLI@2
   displayName: 'dotnet build'
